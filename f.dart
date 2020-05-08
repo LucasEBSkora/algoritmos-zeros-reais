@@ -1,3 +1,3 @@
 import 'dart:math';
 
-double f(double x) => pow(e,x) - pow(x,e)-1; 
+double f(double x) => pow(x,3) - sin(x); 

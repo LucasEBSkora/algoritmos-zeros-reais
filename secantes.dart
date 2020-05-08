@@ -2,27 +2,8 @@ import 'dart:io';
 
 import 'f.dart' show f;
 /*
-Esse método consiste em encontrar, a partir do intervalo inicial,
-intervalos com métade da amplitude do anterior contendo a raiz até que
-a medida desse intervalo esteja dentro da precisão desejada ((b - a) < sigma)
-
-passos:
-  1. determinar intervalo inicial [a0,b0] tal que f(a0)*f(b0) < 0
-  (Pois se a função for contínua, pelo teorema do valor médio, isso é suficiente para garantir que a função tem uma raiz no intervalo)
-
-  2. calcular o ponto médio do intervalo xk = (ak+bk)/2
-
-  3. Se |xk - x(k-1)|/|xk| < sigma ou |f(xk)| < sigma, já estamos na precisão desejada, e podemos parar o algoritmo.
-
-  4. Do contrário, determinamos se a raiz está no lado esquerdo ou direito do intervalo.
-    4.1 Se f(ak)*f(xk) < 0, a raiz está no lado esquerdo do intervalo, e a(k+1) = ak e b(k+1) = xk
-    4.2 Se f(xk)*f(bk) < 0, a raiz está no lado direito do intervalo, e a(k+1) = xk e b(k+1) = bk
-
-  No final, temos um intervalo que contém a raiz exata [a, b] e uma aproximação x para a raiz.
-
-
-  Esse método sempre converge se a função for contínua e existir uma raiz no intervalo, mas pode ser muito devagar se
-  (b0 - a0) >>> sigma e se sigma for muito pequeno.
+  Essencialmente igual ao método da bissecção, mas usa a média ponderada com os valores de f(ak) e f(bk) pra determinar x(k+1)
+  x = a*|f(b)|+b|f(a)|/(|f(b)|+|f(a)|)
 */
 int main(List<String> arguments) {
 
@@ -108,7 +89,12 @@ int main(List<String> arguments) {
 
   do {
     ultimo_x = x;
-    x = (a+b)/2;
+
+
+
+    //Única mudança real em relação ao método da bissecção
+    x = ((f(a).abs()*a)+(f(b).abs()*b))/(f(a).abs() + f(b).abs());
+    //x = (a+b)/2;
 
     if (f(a)*f(x) < 0) {
       b = x;
@@ -129,7 +115,7 @@ int main(List<String> arguments) {
   
   if (f(x).abs() > 10*sigma) 
   stdout.write("Resultados finais: \n");
-  stdout.write("\tMetodo: Bissecção\n");
+  stdout.write("\tMetodo: Secantes\n");
   stdout.write("\tNúmero de iterações: ${iteracoes}\n");
   stdout.write("\tIntervalo contendo respostas exata: [${a}, ${b}]\n");
   stdout.write("\tSolução aproximada: ${x}\n");
