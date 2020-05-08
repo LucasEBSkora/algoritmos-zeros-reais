@@ -127,7 +127,10 @@ int main(List<String> arguments) {
 
   double tempo_final = DateTime.now().microsecondsSinceEpoch/1000000;
   
-  if (f(x).abs() > 10*sigma) 
+  if(f(x).abs() > sigma) {
+    print('Erro! Talvez a solução retornada seja inadequada\n');
+  }
+
   stdout.write("Resultados finais: \n");
   stdout.write("\tMetodo: Bissecção\n");
   stdout.write("\tNúmero de iterações: ${iteracoes}\n");

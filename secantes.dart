@@ -111,9 +111,14 @@ int main(List<String> arguments) {
 
   } while (((x - ultimo_x)/x).abs() > sigma || f(x).abs() > sigma);
 
+
+
   double tempo_final = DateTime.now().microsecondsSinceEpoch/1000000;
-  
-  if (f(x).abs() > 10*sigma) 
+
+  if(f(x).abs() > sigma) {
+    print('Erro! Talvez a solução retornada seja inadequada\n');
+  }
+
   stdout.write("Resultados finais: \n");
   stdout.write("\tMetodo: Secantes\n");
   stdout.write("\tNúmero de iterações: ${iteracoes}\n");

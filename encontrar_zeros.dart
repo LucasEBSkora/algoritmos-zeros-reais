@@ -7,14 +7,17 @@ int main (List<String> arguments) {
 
   if (arguments.length < 3 || arguments.length > 5) {
     print("");
-    print("Uso: dart encontrar_zeros.dart metodo f sigma a b");
-    print("Onde metodo é o método a ser usado, f é a função à analisar,sigma é a precisão desejada, e a e b são os limites do intervalo onde se deve procurar zeros (opcional)");
+    print("Uso: dart encontrar_zeros.dart metodo f sigma args");
+    print("Onde metodo é o método a ser usado, f é a função à analisar,sigma é a precisão desejada, e args são argumentos extras necessários de acordo com o algoritmo");
     print("Para usar espaços com a função, a envolva com aspas");
-    print("Opções para metodo:\n\tbisseccao: Bissecção\n");
-    print("\tsecantes: Método da Posição Falsa, Cordas ou Secantes\n");
+    print("Opções para metodo:\n\tbisseccao: Bissecção - args: a b, que são os limites do intervalo fechado onde buscar as raízes\n");
+    print("\tsecantes: Método da Posição Falsa, Cordas ou Secantes - args: a b, que são os limites do intervalo fechado onde buscar as raízes\n");
+    print("\tponto_fixo: Método do ponto fixo - args: x0 g, onde x0 é uma aproximação inicial e g é a função de ponto fixo à usar.");
 
-    print('Exemplo:\n\tdart encontrar_zeros.dart bisseccao "pow(x,x) - 2" 0.01');
+
+    print('Exemplos:\n\tdart encontrar_zeros.dart bisseccao "pow(x,x) - 2" 0.01');
     print('\tdart encontrar_zeros.dart secantes "pow(2, x) - pow(x, 2)" 0.0005 1 10');
+    print('\tdart encontrar_zeros.dart ponto_fixo "pow(2,x) - x - 2" 0.001 1 "pow(x,2) - 2"');
     print("");
     return -1;
   }
@@ -26,6 +29,9 @@ int main (List<String> arguments) {
   String conteudosArquivo = arquivoModelo.readAsStringSync();
   conteudosArquivo = conteudosArquivo.replaceAll('~', f);
   
+  if(metodo == "ponto_fixo") {
+    conteudosArquivo = conteudosArquivo.replaceAll('0', arguments[4]);
+  }
   
   File arquivoFinal = File('f.dart');
   arquivoFinal.writeAsStringSync(conteudosArquivo);
