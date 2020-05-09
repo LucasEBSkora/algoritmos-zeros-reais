@@ -13,7 +13,7 @@ int main (List<String> arguments) {
     print("Opções para metodo:\n\tbisseccao: Bissecção - args: a b, que são os limites do intervalo fechado onde buscar as raízes\n");
     print("\tsecantes: Método da Posição Falsa, Cordas ou Secantes - args: a b, que são os limites do intervalo fechado onde buscar as raízes\n");
     print("\tponto_fixo: Método do ponto fixo - args: x0 g, onde x0 é uma aproximação inicial e g é a função de ponto fixo à usar.");
-
+    print("\ttangentes: Método de Newton/das tangentes -args: x0, onde x0 é uma aproximação inicial");
 
     print('Exemplos:\n\tdart encontrar_zeros.dart bisseccao "pow(x,x) - 2" 0.01');
     print('\tdart encontrar_zeros.dart secantes "pow(2, x) - pow(x, 2)" 0.0005 1 10');

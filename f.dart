@@ -1,5 +1,5 @@
 import 'dart:math';
 
-double f(double x) => pow(x,2) - sin(x); 
+double f(double x) => 4*cos(x) - exp(x); 
 
-double g(double x) => sin(x)/x;
+double g(double x) => 0;
